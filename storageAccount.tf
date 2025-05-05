@@ -4,7 +4,6 @@ resource "azurerm_storage_account" "example" {
   location                 = var.location
   account_tier             = "Standard"
   account_kind             = "StorageV2"
-  account_replication_type = "GRS"
 }
 
 variable "storage" {
