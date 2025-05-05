@@ -1,3 +1,7 @@
+provider "azurerm" {
+  features {}
+}
+
 resource "azurerm_storage_account" "example" {
   name                     = var.storage
   resource_group_name      = var.resource_group
