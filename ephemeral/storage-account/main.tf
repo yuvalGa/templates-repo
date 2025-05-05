@@ -1,30 +1,41 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 4.0"
+    }
+  }
+}
+
 provider "azurerm" {
   features {}
+  resource_provider_registrations = "none"
 }
 
-resource "azurerm_storage_account" "example" {
-  name                     = var.storage
-  resource_group_name      = var.resource_group
-  location                 = var.location
+resource "azurerm_storage_account" "storage_account" {
+  name                     = var.storage_account_name
+  resource_group_name      = data.azurerm_resource_group.resource-group.name
+  location                 = data.azurerm_resource_group.resource-group.location
   account_tier             = "Standard"
-  account_kind             = "StorageV2"
   account_replication_type = "GRS"
+
+  tags = {
+    CreatedBy = "ControlMonkey Template"
+  }
 }
 
-variable "storage" {
+variable "storage_account_name" {
   description = "The name of the Storage Account to create."
   type        = string
   default     = null
 }
 
-variable "resource_group" {
+variable "resource_group_name" {
   description = "Name of the existing Azure Resource Group in which the Storage Account will be created."
   type        = string
   default     = null
 }
 
-variable "location" {
-  description = "Azure region where the Storage Account and associated resources will be deployed (e.g., eastus, westeurope)."
-  type        = string
-  default     = null
+data "azurerm_resource_group" "resource_group" {
+  name = var.resource_group_name
 }
