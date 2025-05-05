@@ -7,11 +7,20 @@ resource "azurerm_storage_account" "example" {
   account_replication_type = "GRS"
 }
 
-variable "storage_name" {
+variable "storage" {
+  description = "The name of the Storage Account to create."
+  type        = string
+  default     = null
 }
 
-variable "resource_group_name" {
+variable "resource_group" {
+  description = "Name of the existing Azure Resource Group in which the Storage Account will be created."
+  type        = string
+  default     = null
 }
 
 variable "location" {
+  description = "Azure region where the Storage Account and associated resources will be deployed (e.g., eastus, westeurope)."
+  type        = string
+  default     = null
 }
