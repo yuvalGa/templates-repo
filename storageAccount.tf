@@ -1,6 +1,6 @@
 resource "azurerm_storage_account" "example" {
-  name                     = var.storage_name
-  resource_group_name      = var.resource_group_name
+  name                     = var.storage
+  resource_group_name      = var.resource_group
   location                 = var.location
   account_tier             = "Standard"
   account_kind             = "StorageV2"
